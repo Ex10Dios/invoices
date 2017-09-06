@@ -1,0 +1,31 @@
+<h1>Invoices</h1>
+<div class="row">
+  <div class="col-md-12 text-right">
+    <a href="#!/invoices/new" class="btn btn-success">+ New Invoice</a>
+  </div>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Customer</th>
+      <th>Discount</th>
+      <th>Total</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="invoice in invoices">
+      <td>{{ invoice.id }}</td>
+      <td>{{ invoice.customer ? invoice.customer.name : invoice.customer_id }}</td>
+      <td>{{ invoice.discount }}%</td>
+      <td>{{ invoice.total | currency }}</td>
+      <td>
+        <button class="btn btn-default btn-xs" title="Remove" ng-click="remove(invoice.id)">
+          <i class="glyphicon glyphicon-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,89 @@
+<style>
+	select {
+	    -webkit-appearance: none;
+	    -webkit-border-radius: 0px;
+	}
+	.input-sm {
+	    width: 100px;
+	}
+</style>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">New Invoice</h2>
+			</div>
+			<div class="panel-body">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="email">Customer:</label>
+						<div class="col-sm-10">
+							<select class="form-control" ng-model="invoice.customer_id" required="">
+								<option value="">Select Customer...</option>
+								<option ng-repeat="customer in customers" value="{{ customer.id }}">{{ customer.name }}</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">Items:</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<select class="form-control" ng-model="item_id">
+									<option ng-repeat="product in products" value="{{ product.id }}">{{ product.name }}</option>
+								</select>
+								<span class="input-group-btn">
+							        <button class="btn btn-default" ng-click="addItem(item_id)" type="button" title="Add">+</button>
+							    </span>
+							</div>
+						</div>
+					</div>
+					
+
+					<div class="form-group">
+						<label class="control-label col-sm-2"></label>
+						<div class="col-sm-10">
+							<table class="table table-hover">
+								<tbody>
+									<tr ng-repeat="item in invoice.items">
+										<td>{{ item.name }}</td>
+										<td><input type="number" min="1" step="1" class="form-control input-sm" ng-model="item.quantity" ng-change="calcPrice()"></td>
+										<td>{{ item.price | currency }}</td>
+										<td>
+											<button type="button" class="btn btn-default btn-xs" title="Remove" ng-click="removeItem(item.id)">
+												<i class="glyphicon glyphicon-trash"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+
+
+
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">Discount:</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+							  <input type="number" min="0" step="0.01" max="100" class="form-control" placeholder="0,00" style="text-align: right;" ng-model="invoice.discount" ng-change="calcPrice()">
+							  <span class="input-group-addon">%</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="email">Total:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" readonly="" ng-model="invoice.total">
+						</div>
+					</div>
+					<div class="form-group">        
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" ng-click="createInvoice()" class="btn btn-default">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+<h1>Customers</h1>
+
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Phone</th>
+    <th>Action</th>
+  </tr>
+</thead>
+<tbody>
+  <tr ng-repeat="customer in customers">
+    <td>{{ customer.id }}</td>
+    <td>{{ customer.name }}</td>
+    <td>{{ customer.address }}</td>
+    <td>{{ customer.phone }}</td>
+    <td><button class="btn btn-default btn-xs" title="Remove" ng-click="remove(customer.id)"><i class="glyphicon glyphicon-trash"></i></button></td>
+  </tr>
+</tbody>
+</table>
